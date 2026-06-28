@@ -24,6 +24,12 @@ const thisWeekExtra = [
 module.exports = {
   id: 'community.cinema.timemachine',
   version: '0.1.0',
+  // Ownership proof from stremio-addons.net — verifies this manifest is served by the author.
+  stremioAddonsConfig: {
+    issuer: 'https://stremio-addons.net',
+    signature:
+      'eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..0BA5vK1j8OBbhnvZTvB1nA.Pn8SZch5rLOxr_bUTUdzrM_f3jGvxSVbGGwgmk_l6voycuLqgbZ8p2D9IWliQXea59YCtu3N0c5CL4tO847WoiaGVZZVyHgWONIQ1KLMkCCeQMxxKVBLhwrXYz_9JPxH.6ctU_8mnkcnFLKlQbu9uAQ',
+  },
   name: 'Cinema Time Machine',
   description:
     'Travel to any year and browse film and TV as it was then. Pick a year from the dropdown ' +
