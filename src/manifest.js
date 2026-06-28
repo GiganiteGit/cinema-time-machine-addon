@@ -28,7 +28,7 @@ module.exports = {
   stremioAddonsConfig: {
     issuer: 'https://stremio-addons.net',
     signature:
-      'eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..0BA5vK1j8OBbhnvZTvB1nA.Pn8SZch5rLOxr_bUTUdzrM_f3jGvxSVbGGwgmk_l6voycuLqgbZ8p2D9IWliQXea59YCtu3N0c5CL4tO847WoiaGVZZVyHgWONIQ1KLMkCCeQMxxKVBLhwrXYz_9JPxH.6ctU_8mnkcnFLKlQbu9uAQ',
+      'eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..J79zUy-NZNIhkIn-B1YhAg.rEQDhykmBnJ0Tjnyq1dXWSQk-Qq3gSvBExG_kM1y1Y9L2VIkqCOOJjMgqxg4yXCGb89G9dD36L-D5JUXi4B-_SObFfAt_x3DzqySXueah69l_FQM314UzaMxPHwO3tMV.y8i6fOlHo0tz2zUw8sNUVw',
   },
   name: 'Cinema Time Machine',
   description:
