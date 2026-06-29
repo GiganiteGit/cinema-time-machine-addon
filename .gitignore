@@ -37,6 +37,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# beamup (local deploy CLI state)
+beamup.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
