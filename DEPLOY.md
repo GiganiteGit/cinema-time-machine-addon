@@ -36,6 +36,7 @@ host keeps cold-starts rare). This deploys to the **public** service.
    - `TMDB_READ_TOKEN` (or `TMDB_API_KEY`)
    - `SUPABASE_URL`, `SUPABASE_KEY` (the **anon/publishable** key, not service_role)
    - `ADDON_BASE_URL=https://<slug>.baby-beamup.club`
+   - `ANALYTICS_SALT` (any long random string — pins the salted IP hash for usage analytics)
 
    Set each var in its **own** call — BeamUp's `config:set` silently keeps only the first
    when several are passed at once:
@@ -44,9 +45,15 @@ host keeps cold-starts rare). This deploys to the **public** service.
    ssh dokku@a.baby-beamup.club config:set <slug> SUPABASE_URL=https://obmgtoznzsxrokqupreq.supabase.co
    ssh dokku@a.baby-beamup.club config:set <slug> SUPABASE_KEY=sb_publishable_...
    ssh dokku@a.baby-beamup.club config:set <slug> ADDON_BASE_URL=https://<slug>.baby-beamup.club
+   ssh dokku@a.baby-beamup.club config:set <slug> ANALYTICS_SALT=$(openssl rand -hex 16)
    ```
    Values come from your local `.env.local`. Env changes apply only after the full
    `beamup-trigger-swarm-sync` finishes (minutes) — wait for it before testing.
+
+   **One-time Supabase setup:** run `supabase/analytics.sql` in the Supabase SQL editor
+   (service_role) to create the `ctm_events` table before relying on usage metrics —
+   until it exists the inserts just no-op silently. Read the figures back with the
+   queries in `supabase/analytics_queries.sql`.
 5. **Redeploy if needed** so the app picks up the env (`git push beamup main:master`, or `beamup`).
 6. **Test:**
    - Open `https://<slug>.baby-beamup.club/` (landing) and `.../manifest.json` in a browser.

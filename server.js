@@ -14,10 +14,28 @@ const path = require('path');
 const express = require('express');
 const { getRouter } = require('stremio-addon-sdk');
 const addonInterface = require('./src/addon');
+const { record } = require('./src/lib/analytics');
 
 const port = Number(process.env.PORT) || 7000;
 const app = express();
 app.disable('x-powered-by');
+
+// Usage analytics (privacy-preserving, fire-and-forget). Runs first so it sees
+// every request, then classifies it by path: manifest fetches (install/refresh)
+// and catalog browses (real use). Static assets and the landing page are ignored.
+// Wrapped so analytics can never break a request.
+app.use((req, _res, next) => {
+  try {
+    const pathname = req.url.split('?')[0];
+    let kind;
+    if (pathname.endsWith('/manifest.json')) kind = 'manifest';
+    else if (pathname.includes('/catalog/')) kind = 'catalog';
+    if (kind) record(kind, req);
+  } catch {
+    /* analytics must never break a request */
+  }
+  next();
+});
 
 // Static assets (logo/background land in Phase 5). Harmless while empty.
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: '7d' }));
